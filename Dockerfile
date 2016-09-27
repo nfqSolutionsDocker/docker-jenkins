@@ -32,9 +32,9 @@ COPY init.groovy /home/solutions/
 
 # Script de arranque
 COPY jenkins.sh /home/solutions/
-RUN sudo chown solutions:nfq /home/solutions/jenkins.sh \
-	chmod 777 /home/solutions/jenkins.sh \
-	chmod a+x /home/solutions/jenkins.sh \
+RUN sudo chown solutions:nfq /home/solutions/jenkins.sh && \
+	chmod 777 /home/solutions/jenkins.sh && \
+	chmod a+x /home/solutions/jenkins.sh && \
 	sed -i -e 's/\r$//' /home/solutions/jenkins.sh
 
 # Volumen para el JENKINS_HOME
