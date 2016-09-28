@@ -27,4 +27,4 @@ if [ ! -f /home/solutions/jenkins/jenkins.war ]; then
 	sudo chmod -R 777 /home/solutions/app/jenkins
 fi
 
-java $JAVA_OPTS -jar /home/solutions/jenkins/jenkins.war
+java $JAVA_OPTS -jar /home/solutions/app/jenkins/jenkins.war
