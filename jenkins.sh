@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/solutions/install_packages.sh
+
 echo Instalando java ...
 if [ ! -f /solutions/app/java/bin/java ]; then
 	wget -P /solutions/app/ --no-cookies --no-check-certificate --header \
