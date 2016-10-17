@@ -9,9 +9,9 @@ RUN yum install -y wget git curl zip hg libaio epel-release.noarch && \
 # Variables de entorno
 ENV JAVA_HOME=/solutions/app/java \
 	JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8 \
-	M2_HOME=/solutions/app/maven \
-	JAVA_VERSION=7u80 \
-	M2_VERSION=3.3.9 \
+	#M2_HOME=/solutions/app/maven \
+	JAVA_VERSION=8u92 \
+	#M2_VERSION=3.3.9 \
 	JENKINS_HOME=/solutions/app/jenkins \
 	JENKINS_SLAVE_AGENT_PORT=50000 \
 	JENKINS_VERSION=2.7.3 \
@@ -19,7 +19,8 @@ ENV JAVA_HOME=/solutions/app/java \
 	JENKINS_UC=https://updates.jenkins.io
 ENV JENKINS_URL=http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war \
 	COPY_REFERENCE_FILE_LOG=$JENKINS_HOME/copy_reference_file.log \
-	PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
+	PATH=$PATH:$JAVA_HOME/bin
+	#:$M2_HOME/bin
 																   
 # Modificaciones para SOLUTIONS
 COPY init.groovy /solutions/
