@@ -13,7 +13,7 @@ if [ ! -f /solutions/app/java/bin/java ]; then
 fi
 
 echo Instalando jenkins ...
-if [ ! -f /solutions/jenkins/jenkins.war ]; then
+if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	mkdir -p /solutions/app/jenkins
 	mkdir -p /solutions/app/jenkins/ref/init.groovy.d
 	cp /solutions/init.groovy /solutions/app/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
