@@ -20,6 +20,27 @@ if [ ! -f /solutions/app/maven/bin/mvn ]; then
 	ln -sf $(ls -d /solutions/app/apache-maven*/) /solutions/app/maven
 fi
 
+echo Instalando servidor ssh ...
+if [ ! -f /usr/sbin/sshd ]; then
+	yum -y install openssh-server
+	mkdir /var/run/sshd
+	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
+	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
+fi
+
+yum -y install xorg-x11-xauth
+yum -y install xorg-x11-utils
+yum -y install xorg-x11-fonts-*
+yum -y install xorg-x11-server-utils
+yum clean all
+
+echo Instalando chrome ...
+if [ ! -f /usr/bin/chrome ]; then
+	yum -y install chromium
+	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
+fi
+
 echo Instalando jenkins ...
 if [ ! -f /solutions/jenkins/jenkins.war ]; then
 	mkdir -p /solutions/app/jenkins

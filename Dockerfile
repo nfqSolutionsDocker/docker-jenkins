@@ -40,6 +40,7 @@ VOLUME /solutions/app
 EXPOSE 8080
 # - will be used by attached slave agents:
 EXPOSE 50000
+EXPOSE 22
 
 # Copy supervisor file
 COPY supervisord.conf /etc/supervisord.conf
