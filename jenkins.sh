@@ -17,6 +17,7 @@ if [ ! -f /usr/sbin/sshd ]; then
 	yum -y install openssh-server
 	mkdir /var/run/sshd
 	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+	cat /etc/ssh/ssh_host_rsa_key
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
 fi
@@ -27,10 +28,9 @@ yum -y install xorg-x11-fonts-*
 yum -y install xorg-x11-server-utils
 yum clean all
 
-echo Instalando chrome ...
-if [ ! -f /usr/bin/chrome ]; then
-	yum -y install chromium
-	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
+echo Instalando firefox ...
+if [ ! -f /usr/bin/firefox ]; then
+	yum -y install firefox
 fi
 
 echo Instalando jenkins ...
@@ -42,4 +42,5 @@ if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	chmod -R 777 /solutions/app/jenkins
 fi
 
+/usr/sbin/sshd -D &
 java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war
