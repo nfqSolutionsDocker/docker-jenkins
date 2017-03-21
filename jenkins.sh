@@ -14,19 +14,14 @@ fi
 
 echo Instalando servidor ssh ...
 if [ ! -f /usr/sbin/sshd ]; then
-	yum -y install openssh-server
+	yum install -y openssh-server
 	mkdir /var/run/sshd
-	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
-	cat /etc/ssh/ssh_host_rsa_key
+	ssh-keygen -t rsa -f /solutions/app/local.pem -N ''
+	sed -i "s/HostKey \/etc\/ssh\/ssh_host_rsa_key/#HostKey \/solutions\/app\/local.pem/g" /etc/ssh/sshd_config
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
+	yum install -y xorg-x11-*
 fi
-
-yum -y install xorg-x11-xauth
-yum -y install xorg-x11-utils
-yum -y install xorg-x11-fonts-*
-yum -y install xorg-x11-server-utils
-yum clean all
 
 echo Instalando firefox ...
 if [ ! -f /usr/bin/firefox ]; then
