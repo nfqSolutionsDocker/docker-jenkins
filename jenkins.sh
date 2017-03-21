@@ -30,7 +30,11 @@ yum clean all
 
 echo Instalando firefox ...
 if [ ! -f /usr/bin/firefox ]; then
-	yum -y install firefox
+	cd /etc/yum.repos.d
+	curl -O https://winswitch.org/downloads/CentOS/winswitch.repo
+	yum repolist
+	yum install -y xpra
+	yum install -y firefox
 fi
 
 echo Instalando jenkins ...
