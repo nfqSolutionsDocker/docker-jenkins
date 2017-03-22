@@ -2,22 +2,32 @@
 
 This container has the following characteristics:
 - Container nfqsolutions/centos:7.
-- The java directory is /solutions/app/java.
-- The maven directory is /solutions/app/maven.
-- Installations script of jenkins in centos. This script copy jenkins directory to volumen. This script is executing in the next containers or in the docker compose.
+- Python 3.4
+- Nodejs
+- Java version 8u92
+- Jenkins version 2.7.3
+- GNOME Desktop
+- Chrome
+- ...
 
 For example, docker-compose.yml:
 ```
-app:
- image: nfqsolutions/jenkins:2.7.3-jdk7-mvn3.3.9
+jenkins:
+ image: nfqsolutions/jenkins
+ privileged: true
  restart: always
+ container_name: jenkins_test
+ net: "host"
  ports:
-  - "8080:8080"
+  - "8081:8800"
  environment:
+  - JAVA_OPTS=-Xms512m -Xmx1024m
   - PACKAGES=
-  - JAVA_OPTS=-Xms124m -Xmx1024m
+  - DISPLAY
  volumes:
-  - <mydirectory>:/solutions/app
+  - ./volumen/:/solutions/app
+  - /tmp/.X11-unix:/tmp/.X11-unix
+  - $HOME/.Xauthority:/root/.Xauthority
  
 ```
 
