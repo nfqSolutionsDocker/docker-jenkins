@@ -38,7 +38,7 @@ VOLUME /solutions/app
 
 # Puertos de salida del jenkins
 # - for main web interface:
-EXPOSE 8080
+EXPOSE 8800
 # - will be used by attached slave agents:
 EXPOSE 50000
 EXPOSE 22
