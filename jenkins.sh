@@ -12,20 +12,23 @@ if [ ! -f /solutions/app/java/bin/java ]; then
 	ln -sf $(ls -d /solutions/app/jdk*/) /solutions/app/java
 fi
 
-echo Instalando servidor ssh ...
-if [ ! -f /usr/sbin/sshd ]; then
-	yum install -y openssh-server
-	mkdir /var/run/sshd
-	ssh-keygen -t rsa -f /solutions/app/local.pem -N ''
-	mkdir /root/.ssh
-	cat /solutions/app/local.pem.pub >> /root/.ssh/authorized_keys
-	sed -i "s/HostKey \/etc\/ssh\/ssh_host_rsa_key/HostKey \/solutions\/app\/local.pem/g" /etc/ssh/sshd_config
-	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
-	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
-	sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
-	sed -i "s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g" /etc/ssh/sshd_config
-	yum install -y xorg-x11-*
-fi
+#echo Instalando servidor ssh ...
+#if [ ! -f /usr/sbin/sshd ]; then
+#	yum install -y openssh-server
+#	mkdir /var/run/sshd
+#	ssh-keygen -t rsa -f /solutions/app/local.pem -N ''
+#	mkdir /root/.ssh
+#	cat /solutions/app/local.pem.pub >> /root/.ssh/authorized_keys
+#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_rsa_key/HostKey \/solutions\/app\/local.pem/g" /etc/ssh/sshd_config
+#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
+#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
+#	sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
+#	sed -i "s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g" /etc/ssh/sshd_config
+#	yum install -y xorg-x11-*
+#fi
+
+echo Instalando Escritorio GNOME ...
+yum -y groups install "GNOME Desktop"
 
 echo Instalando firefox ...
 if [ ! -f /usr/bin/firefox ]; then
@@ -45,5 +48,5 @@ if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	chmod -R 777 /solutions/app/jenkins
 fi
 
-/usr/sbin/sshd -D &
+#/usr/sbin/sshd -D &
 java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war
