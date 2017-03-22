@@ -27,16 +27,24 @@ fi
 #	yum install -y xorg-x11-*
 #fi
 
+#echo Instalando firefox ...
+#if [ ! -f /usr/bin/firefox ]; then
+#	cd /etc/yum.repos.d
+#	curl -O https://winswitch.org/downloads/CentOS/winswitch.repo
+#	yum repolist
+#	yum install -y xpra
+#	yum install -y firefox
+#fi
+
 echo Instalando Escritorio GNOME ...
 yum -y groups install "GNOME Desktop"
 
-echo Instalando firefox ...
-if [ ! -f /usr/bin/firefox ]; then
-	cd /etc/yum.repos.d
-	curl -O https://winswitch.org/downloads/CentOS/winswitch.repo
-	yum repolist
-	yum install -y xpra
-	yum install -y firefox
+echo Instalando chromium ...
+if [ ! -f /usr/bin/chrome ]; then
+	yum install -y chrome-remote-desktop chromedriver.x86_64 chromium-libs.x86_64 chromium-libs-media.x86_64 \
+		libchromaprint-devel.x86_64 xorg-x11-drv-openchrome.x86_64 xorg-x11-drv-openchrome-devel.x86_64 \
+		chromium.x86_64 libchromaprint.x86_64 mathjax-winchrome-fonts.noarch qfaxreader.x86_64
+	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
 fi
 
 echo Instalando jenkins ...
