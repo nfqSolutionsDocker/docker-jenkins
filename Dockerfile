@@ -4,7 +4,7 @@ MAINTAINER solutions@nfq.com
 
 # Instalacion previa
 RUN yum install -y wget git curl zip hg libaio epel-release.noarch && \
-	yum install -y python34-setuptools python34-pip
+	yum install -y python34-setuptools python34-pip nodejs
 
 # Variables de entorno
 ENV JAVA_HOME=/solutions/app/java \

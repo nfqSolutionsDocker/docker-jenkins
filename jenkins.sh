@@ -27,6 +27,17 @@ fi
 #	yum install -y xorg-x11-*
 #fi
 
+echo Instalando jenkins ...
+if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
+	mkdir -p /solutions/app/jenkins
+	mkdir -p /solutions/app/jenkins/ref/init.groovy.d
+	cp /solutions/init.groovy /solutions/app/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
+	curl -fsSL ${JENKINS_URL} -o /solutions/app/jenkins/jenkins.war && echo "${JENKINS_SHA}  /solutions/app/jenkins/jenkins.war" | sha1sum -c -
+	chmod -R 777 /solutions/app/jenkins
+fi
+
+java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war &
+
 #echo Instalando firefox ...
 #if [ ! -f /usr/bin/firefox ]; then
 #	cd /etc/yum.repos.d
@@ -46,15 +57,3 @@ if [ ! -f /usr/bin/chrome ]; then
 		chromium.x86_64 libchromaprint.x86_64 mathjax-winchrome-fonts.noarch qfaxreader.x86_64
 	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
 fi
-
-echo Instalando jenkins ...
-if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
-	mkdir -p /solutions/app/jenkins
-	mkdir -p /solutions/app/jenkins/ref/init.groovy.d
-	cp /solutions/init.groovy /solutions/app/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
-	curl -fsSL ${JENKINS_URL} -o /solutions/app/jenkins/jenkins.war && echo "${JENKINS_SHA}  /solutions/app/jenkins/jenkins.war" | sha1sum -c -
-	chmod -R 777 /solutions/app/jenkins
-fi
-
-#/usr/sbin/sshd -D &
-java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war
