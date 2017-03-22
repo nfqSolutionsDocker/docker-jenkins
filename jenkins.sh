@@ -17,10 +17,13 @@ if [ ! -f /usr/sbin/sshd ]; then
 	yum install -y openssh-server
 	mkdir /var/run/sshd
 	ssh-keygen -t rsa -f /solutions/app/local.pem -N ''
+	mkdir /root/.ssh
 	cat /solutions/app/local.pem.pub >> /root/.ssh/authorized_keys
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_rsa_key/HostKey \/solutions\/app\/local.pem/g" /etc/ssh/sshd_config
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
 	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
+	sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
+	sed -i "s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g" /etc/ssh/sshd_config
 	yum install -y xorg-x11-*
 fi
 
