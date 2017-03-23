@@ -56,4 +56,4 @@ if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	chmod -R 777 /solutions/app/jenkins
 fi
 
-java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war --httpPort=8800 &
+java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war --httpPort=8800
