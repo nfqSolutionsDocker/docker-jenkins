@@ -36,16 +36,16 @@ fi
 #	yum install -y firefox
 #fi
 
-echo Instalando Escritorio GNOME ...
-yum -y groups install "GNOME Desktop"
+#echo Instalando Escritorio GNOME ...
+#yum -y groups install "GNOME Desktop"
 
-echo Instalando chromium ...
-if [ ! -f /usr/bin/chrome ]; then
-	yum install -y chrome-remote-desktop chromedriver.x86_64 chromium-libs.x86_64 chromium-libs-media.x86_64 \
-		libchromaprint-devel.x86_64 xorg-x11-drv-openchrome.x86_64 xorg-x11-drv-openchrome-devel.x86_64 \
-		chromium.x86_64 libchromaprint.x86_64 mathjax-winchrome-fonts.noarch qfaxreader.x86_64
-	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
-fi
+#echo Instalando chromium ...
+#if [ ! -f /usr/bin/chrome ]; then
+#	yum install -y chrome-remote-desktop chromedriver.x86_64 chromium-libs.x86_64 chromium-libs-media.x86_64 \
+#		libchromaprint-devel.x86_64 xorg-x11-drv-openchrome.x86_64 xorg-x11-drv-openchrome-devel.x86_64 \
+#		chromium.x86_64 libchromaprint.x86_64 mathjax-winchrome-fonts.noarch qfaxreader.x86_64
+#	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
+#fi
 
 echo Instalando jenkins ...
 if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
@@ -56,4 +56,5 @@ if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	chmod -R 777 /solutions/app/jenkins
 fi
 
-java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war --httpPort=8800
+#java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war --httpPort=8800
+java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war
