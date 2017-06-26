@@ -3,8 +3,14 @@ FROM nfqsolutions/centos:7
 MAINTAINER solutions@nfq.com
 
 # Instalacion previa
-RUN yum install -y wget git curl zip hg libaio epel-release.noarch && \
-	yum install -y python34-setuptools python34-pip nodejs
+RUN yum install -y wget git curl zip hg libaio epel-release && \
+	yum install -y nodejs gcc blas_devel fftw fftw-devel atlas-devel atlas \
+    atlas-sse3 make mysql56 mysql56-devel lapack lapack-devel lapack-static \
+    zlib zlib-devel openssl openssl-devel sqlite-devel npm && \
+    npm install gulp && \
+    npm install gulp-rev-all && \
+    npm install gulp-replace && \
+    npm install del
 
 # Variables de entorno
 ENV JAVA_HOME=/solutions/app/java \
@@ -12,7 +18,7 @@ ENV JAVA_HOME=/solutions/app/java \
 	JAVA_VERSION=8u92 \
 	JENKINS_HOME=/solutions/app/jenkins \
 	JENKINS_SLAVE_AGENT_PORT=50000 \
-	JENKINS_VERSION=2.7.3 \
+	JENKINS_VERSION=2.67 \
 	JENKINS_SHA=f822e70810e0d30c6fbe7935273635740faa3d89 \
 	JENKINS_UC=https://updates.jenkins.io
 ENV JENKINS_URL=http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war \

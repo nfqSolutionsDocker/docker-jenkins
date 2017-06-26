@@ -2,17 +2,19 @@
 
 This container has the following characteristics:
 - Container nfqsolutions/centos:7.
-- Python 3.4
-- Nodejs
-- Java version 8u92
-- Jenkins version 2.7.3
+- Installations yum: wget, git, curl, zip, hg, libaio, epel-release, nodejs, gcc, blas_devel, fftw, fftw-devel, atlas-devel, atlas, 
+    atlas-sse3, make, mysql56, mysql56-devel, lapack, lapack-devel, lapack-static, zlib, zlib-devel, openssl, openssl-devel, sqlite-devel, npm
+- Installations npm: gulp, gulp-rev-all, gulp-replace, del
+- Installation Java: 8u92
+- Installation Python: 3.6.1
+- Installation Jenkins: 2.67
 
 For example, docker-compose.yml:
 ```
 jenkins:
- image: nfqsolutions/jenkins
+ image: nfqsolutions/jenkins:2.67-jdk8-python3.6.1
  restart: always
- container_name: jenkins_test
+ container_name: jenkins
  ports:
   - "8081:8080"
  environment:

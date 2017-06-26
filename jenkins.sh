@@ -12,40 +12,13 @@ if [ ! -f /solutions/app/java/bin/java ]; then
 	ln -sf $(ls -d /solutions/app/jdk*/) /solutions/app/java
 fi
 
-#echo Instalando servidor ssh ...
-#if [ ! -f /usr/sbin/sshd ]; then
-#	yum install -y openssh-server
-#	mkdir /var/run/sshd
-#	ssh-keygen -t rsa -f /solutions/app/local.pem -N ''
-#	mkdir /root/.ssh
-#	cat /solutions/app/local.pem.pub >> /root/.ssh/authorized_keys
-#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_rsa_key/HostKey \/solutions\/app\/local.pem/g" /etc/ssh/sshd_config
-#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ecdsa_key/#HostKey \/etc\/ssh\/ssh_host_ecdsa_key/g" /etc/ssh/sshd_config
-#	sed -i "s/HostKey \/etc\/ssh\/ssh_host_ed25519_key/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/g" /etc/ssh/sshd_config
-#	sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
-#	sed -i "s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g" /etc/ssh/sshd_config
-#	yum install -y xorg-x11-*
-#fi
-
-#echo Instalando firefox ...
-#if [ ! -f /usr/bin/firefox ]; then
-#	cd /etc/yum.repos.d
-#	curl -O https://winswitch.org/downloads/CentOS/winswitch.repo
-#	yum repolist
-#	yum install -y xpra
-#	yum install -y firefox
-#fi
-
-#echo Instalando Escritorio GNOME ...
-#yum -y groups install "GNOME Desktop"
-
-#echo Instalando chromium ...
-#if [ ! -f /usr/bin/chrome ]; then
-#	yum install -y chrome-remote-desktop chromedriver.x86_64 chromium-libs.x86_64 chromium-libs-media.x86_64 \
-#		libchromaprint-devel.x86_64 xorg-x11-drv-openchrome.x86_64 xorg-x11-drv-openchrome-devel.x86_64 \
-#		chromium.x86_64 libchromaprint.x86_64 mathjax-winchrome-fonts.noarch qfaxreader.x86_64
-#	ln -sf /usr/lib64/chromium-browser/chromium-browser.sh /usr/bin/chrome
-#fi
+echo Instalando python ...
+if [ ! -f /usr/local/bin/python3 ]; then
+	wget -P /usr/src/ "https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz"
+	tar -xzf /usr/src/Python-3.6.1.tgz -C /usr/src/
+	/usr/src/Python-3.6.1/configure
+	make install -I /usr/src/Python-3.6.1/
+fi
 
 echo Instalando jenkins ...
 if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
@@ -56,5 +29,4 @@ if [ ! -f /solutions/app/jenkins/jenkins.war ]; then
 	chmod -R 777 /solutions/app/jenkins
 fi
 
-#java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war --httpPort=8800
 java $JAVA_OPTS -jar /solutions/app/jenkins/jenkins.war
