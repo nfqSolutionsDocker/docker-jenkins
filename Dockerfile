@@ -3,7 +3,7 @@ FROM nfqsolutions/centos:7
 MAINTAINER solutions@nfq.com
 
 # Instalacion previa
-RUN yum install -y wget git curl zip hg libaio epel-release.noarch && \
+RUN yum install -y wget git curl zip hg libtool-ltdl.x86_64 libaio epel-release.noarch && \
 	yum -y install python-pip.noarch
 
 # Variables de entorno
