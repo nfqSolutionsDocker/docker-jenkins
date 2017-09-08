@@ -3,10 +3,11 @@ FROM nfqsolutions/centos:7
 MAINTAINER solutions@nfq.com
 
 # Instalacion previa
-RUN yum install -y wget git curl zip hg libaio epel-release && \
+RUN rpm -ivh https://kojipkgs.fedoraproject.org//packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm && \
+    yum install -y wget git curl zip hg libaio epel-release && \
 	yum install -y nodejs gcc blas_devel fftw fftw-devel atlas-devel atlas \
     atlas-sse3 make mysql56 mysql56-devel lapack lapack-devel lapack-static \
-    zlib zlib-devel openssl openssl-devel sqlite-devel npm && \
+    zlib zlib-devel openssl openssl-devel sqlite-devel npm libtool-ltdl.x86_64 && \
     npm install gulp && \
     npm install gulp-rev-all && \
     npm install gulp-replace && \
